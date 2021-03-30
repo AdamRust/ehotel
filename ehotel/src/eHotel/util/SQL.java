@@ -9,10 +9,13 @@ public final class SQL {
 	// Account queries
 	public static final String GET_ACCOUNT_FROM_ID = "SELECT * FROM ehotel.account WHERE account_id=?";
 	public static final String GET_ACCOUNT_FROM_USERNAME = "SELECT * FROM ehotel.account WHERE username=?";
+	public static final String INSERT_NEW_ACCOUNT = "INSERT INTO ehotel.account VALUES (?,?,?) RETURNING account_id";
+	// Address queries
+	public static final String INSERT_NEW_ADDRESS = "INSERT INTO ehotel.address VALUES (?,?,?,?,?,?,?) RETURNING address_id";
 	// Customer queries
 	public static final String GET_CUSTOMER_FROM_ID = "SELECT * FROM ehotel.customer WHERE customer_id=?";
 	public static final String GET_CUSTOMER_FROM_ACCOUNT_ID = "SELECT * FROM ehotel.customer WHERE account_id=?";
-	public static final String INSERT_NEW_CUSTOMER = "INSERT INTO ehotel.customer VALUES (?,?,?)";
+	public static final String INSERT_NEW_CUSTOMER = "INSERT INTO ehotel.customer VALUES (?,?,?,?,?) RETURNING customer_id";
 	// Employee queries
 	public static final String GET_EMPLOYEE_FROM_ID = "SELECT * FROM ehotel.employee WHERE employee_id=? AND hotel_id=?"; 
 	// Room queries
@@ -26,6 +29,7 @@ public final class SQL {
 	public static final String GET_HOTEL_BRAND_FROM_ID = "SELECT * FROM ehotel.hotel_brand WHERE brand_id=?";
 	// Booking queries
 	public static final String GET_BOOKED_ROOMS_FOR_CUSTOMER = "SELECT * FROM ehotel.room WHERE room_id IN (SELECT room_id FROM booking WHERE customer_id=? AND check_out_date >= CURRENT_DATE)";
+	public static final String CREATE_NEW_BOOKING = "INSERT INTO ehotel.booking VALUES (?,?,?,?,?,?) RETURNING booking_id";
 		
 	private SQL() {
 		throw new AssertionError();

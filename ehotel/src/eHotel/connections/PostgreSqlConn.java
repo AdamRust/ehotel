@@ -233,7 +233,7 @@ public class PostgreSqlConn{
 	            // Execute query
 	            result = ps.executeQuery();
 	            // Retrieve result
-				while(result.next()) {
+				if (result.next()) {
 					acc.setAccountID(result.getInt(1));
 					acc.setUsername(result.getString(2));
 					acc.setPassword(result.getString(3));
@@ -338,6 +338,70 @@ public class PostgreSqlConn{
 	        }
 			
 			return cust;
+		}
+		
+		public int createNewCustomer(String custFirstName, String custMidInit, String custLastName, String custSin,
+				Date custRegDate, String custAcc_Userame, String custAcc_Pwd, int custAcc_Role, String custAddr_StreetName, 
+				String custAddr_StreetNum, String custAddr_UnitNum, String custAddr_PostalCode, String custAddr_City, 
+				String custAddr_State, String custAddr_Country) {
+			getConn();
+			
+			int new_acc_id = -1;
+			int new_addr_id = -1;
+			int new_cust_id = -1;
+			
+			try {
+				// Prepare SQL for new Account
+				ps = db.prepareStatement(SQL.INSERT_NEW_ACCOUNT);
+				ps.setString(1, custAcc_Userame);
+				ps.setString(2, custAcc_Pwd);
+				ps.setInt(3, custAcc_Role);
+				// Execute query
+				result = ps.executeQuery();
+				// Retrieve account_id for new Account
+				if (result.next()) {
+					new_acc_id = result.getInt(1);
+				}
+				
+				// Prepare SQL for new Address
+				ps = db.prepareStatement(SQL.INSERT_NEW_ADDRESS);
+				ps.setString(1, custAddr_StreetName);
+				ps.setString(2, custAddr_StreetNum);
+				ps.setString(3, custAddr_UnitNum);
+				ps.setString(4, custAddr_PostalCode);
+				ps.setString(5, custAddr_City);
+				ps.setString(6, custAddr_State);
+				ps.setString(7, custAddr_Country);
+				// Execute query
+				result = ps.executeQuery();
+				// Retrieve account_id for new Account
+				if (result.next()) {
+					new_addr_id = result.getInt(1);
+				}
+				
+				// Prepare SQL for new Customer
+				ps = db.prepareStatement(SQL.INSERT_NEW_CUSTOMER);
+				ps.setInt(1, new_addr_id);
+				ps.setString(2, custFirstName);
+				ps.setString(3, custMidInit);
+				ps.setString(4, custLastName);
+				ps.setString(5, custSin);
+				ps.setDate(6, custRegDate);
+				ps.setInt(7, new_acc_id);
+				// Execute query
+				result = ps.executeQuery();
+				// Retrieve account_id for new Account
+				if (result.next()) {
+					new_cust_id = result.getInt(1);
+				}
+				
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+	        	closeDB();
+	        }
+			
+			return new_cust_id;
 		}
 		
 		// Employee
@@ -534,6 +598,36 @@ public class PostgreSqlConn{
 	        }
 			
 			return avail_rooms;
+		}
+		
+		// Booking
+		public int createBooking(int cust_id, int room_id, Date bookingDate, Date checkInDate, Date checkOutDate, int numOfOccupants) {
+			getConn();
+			
+			int booking_id = -1;
+			try{
+	        	// Prepare SQL query
+	            ps = db.prepareStatement(SQL.CREATE_NEW_BOOKING);
+	            ps.setInt(1, cust_id);
+	            ps.setInt(2, room_id);
+	            ps.setDate(3, bookingDate);
+	            ps.setDate(4, checkInDate);
+	            ps.setDate(5, checkOutDate);
+	            ps.setInt(6, numOfOccupants);
+	            // Execute query
+	            result = ps.executeQuery();
+	            // Retrieve result
+				if (result.next()) {
+					booking_id = result.getInt(1);
+				}
+	            
+	        } catch(SQLException e){
+	            e.printStackTrace();
+	        } finally {
+	        	closeDB();
+	        }
+			
+			return booking_id;
 		}
 		
 	}

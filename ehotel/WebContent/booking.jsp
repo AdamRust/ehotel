@@ -11,12 +11,12 @@
 <body>
 
 	<%
-		String CustName = (String) request.getAttribute("CustName");
+		String custName = (String) request.getAttribute("custName");
 	%>
 	<form method="post" action="roombook">
 		<h4>
 			Welcome,
-			<%=CustName%><h4>
+			<%=custName%><h4>
 				<h4>Here are the room(s) you booked</h4>
 				<ul>
 					<%
@@ -27,7 +27,7 @@
 						}
 						if (broomList != null) {
 							for (Room room : broomList) {
-								String roominfo = room.getPrice() + "---" + room.getCapacity();
+								String roominfo = room.getRoomID() + "---" + room.getHotelID();
 					%>
 					<li><%=roominfo%></li>
 					<%
@@ -35,7 +35,7 @@
 						}
 					%>
 				</ul>
-				<input type="hidden" name="custName" value="<%=CustName%>" />
+				<input type="hidden" name="custName" value="<%=custName%>" />
 				<h4>Here are avaiable rooms</h4>
 
 				<select name = "roomno">
@@ -47,9 +47,9 @@
 						}
 						if (roomList != null) {
 							for (Room room : roomList) {
-								/* String roominfo = room.getRoom_no() + "---" + room.getRoom_status(); */
+								String roominfo = room.getRoomID() + "---" + room.getHotelID();
 					%>					
-						<option><%=room.getRoom_id()%></option>
+						<option><%=room.getRoomID()%></option>
 
 					<%
 						}

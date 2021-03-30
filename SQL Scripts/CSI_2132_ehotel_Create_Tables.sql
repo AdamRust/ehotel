@@ -87,7 +87,7 @@ CREATE TABLE customer (
 CREATE TABLE booking (
     booking_id SERIAL PRIMARY KEY,
     customer_id INT NOT NULL,
-    room_id INT NOT NULL,
+    room_id INT NOT NULL, -- TODO: Add hotel_id?
     booking_date DATE NOT NULL DEFAULT CURRENT_DATE,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL,

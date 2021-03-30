@@ -2,6 +2,7 @@ package eHotel.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,27 +23,33 @@ public class RoombookServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 //		employee account = new employee();
-		String custName = req.getParameter("custName");
-		String roomno = req.getParameter("roomno");
+		int custID = Integer.parseInt(req.getParameter("custID"));
+		int roomID = Integer.parseInt(req.getParameter("roomID"));
+		// String hotelID = req.getParameter("hotelID");
+		int numOfOccupants = Integer.parseInt(req.getParameter("numOfOccupants"));
+		Date currDate = new Date();
+		java.sql.Date bookingDate = new java.sql.Date(currDate.getTime());
+		java.sql.Date checkInDate = new java.sql.Date(Date.parse(req.getParameter("checkInDate")));
+		java.sql.Date checkOutDate = new java.sql.Date(Date.parse(req.getParameter("checkOutDate")));
 		
+		PostgreSqlConn conn = new PostgreSqlConn();
 		
-		PostgreSqlConn con = new PostgreSqlConn();
-		
-		String userSSN = con.bookRoom(custName,roomno);
+		// String userSSN = conn.bookRoom(custName, roomID);
+		int bookingID = conn.createBooking(custID, roomID, bookingDate, checkInDate, checkOutDate, numOfOccupants);
 		
 //		[0]:name,[1]:pwd
 //		String[] pwdfromdb = con.getuserinforbycustSSN(userSSN);
 //		
 //		
 //		
-		if (userSSN.length()!=0) {			
+		if (bookingID != -1) {			
 			
-			ArrayList<Room> bookedRooms = con.getbookedRooms(userSSN);
+			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(custID);
 			
-			ArrayList<Room> allRooms = con.getAllAvailRooms();
+			ArrayList<Room> allRooms = conn.getAllAvailRooms();
 			
 			
-			req.setAttribute("custName", custName);
+			req.setAttribute("custID", custID);
 			req.setAttribute("bookedRooms", bookedRooms);
 			req.setAttribute("allRooms", allRooms);
 
