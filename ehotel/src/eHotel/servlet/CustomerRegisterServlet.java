@@ -2,6 +2,7 @@ package eHotel.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import eHotel.connections.PostgreSqlConn;
-import eHotel.entities.Room;
+import eHotel.entities.*;
 
 public class CustomerRegisterServlet extends HttpServlet{
 
@@ -24,35 +25,46 @@ public class CustomerRegisterServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
-//		employee account = new employee();
-		String custSSN = req.getParameter("custSSN");
-		String custName = req.getParameter("custName");
-		String custPwd = req.getParameter("custPwd");
+		PostgreSqlConn conn = new PostgreSqlConn();
 		
-		String[] param = new String[] {custSSN,custName,custPwd};
+		// Customer info
+		String custFirstName = req.getParameter("custFirstName");
+		String custMidInit = req.getParameter("custMidInit");
+		String custLastName = req.getParameter("custLastName");
+		String custSin = req.getParameter("custSin");
+		Date custRegDate = new Date(); // Get current date
+		// Account info
+		String custAcc_Userame = req.getParameter("custAcc_Userame");
+		String custAcc_Pwd = req.getParameter("custAcc_Pwd");
+		//Address info
+		String custAddr_StreetName = req.getParameter("custAddr_StreetName");
+		String custAddr_StreetNum = req.getParameter("custAddr_StreetNum");
+		String custAddr_UnitNum = req.getParameter("custAddr_UnitNum");
+		String custAddr_PostalCode = req.getParameter("custAddr_PostalCode");
+		String custAddr_City = req.getParameter("custAddr_City");
+		String custAddr_State = req.getParameter("custAddr_State");
+		String custAddr_Country = req.getParameter("custAddr_Country");
 		
-		PostgreSqlConn con = new PostgreSqlConn();
-		boolean pwdfromdb = con.insertNewCustomer(param);
-		
-		System.out.println(pwdfromdb);
-		
-		if (pwdfromdb) {			
-				System.out.println("success");
-				
-				ArrayList<Room> bookedRooms = con.getbookedRooms(custSSN);
-				
-				ArrayList<Room> allRooms = con.getAllAvailRooms();
-				
-				System.out.println(allRooms);
-				
-				req.setAttribute("CustName", custName);
-				req.setAttribute("bookedRooms", bookedRooms);
-				req.setAttribute("allRooms", allRooms);
+		try {
+			Customer newCust = conn.createNewCust();
+			
+			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(custSSN);
+			
+			ArrayList<Room> allRooms = conn.getAllAvailRooms();
+			
+			System.out.println(allRooms);
+			
+			req.setAttribute("CustName", custName);
+			req.setAttribute("bookedRooms", bookedRooms);
+			req.setAttribute("allRooms", allRooms);
 
-				req.getRequestDispatcher("booking.jsp").forward(req, resp);
-				return;			
+			req.getRequestDispatcher("booking.jsp").forward(req, resp);
+			return;	
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			resp.sendRedirect("register_failure.jsp");
 		}
-		resp.sendRedirect("register_failure.jsp");
+		
 		return;
 	}
 	

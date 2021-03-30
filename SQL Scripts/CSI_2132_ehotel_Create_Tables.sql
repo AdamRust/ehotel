@@ -56,11 +56,11 @@ CREATE TABLE address (
 CREATE TABLE room (
     room_id INT,
     hotel_id INT,
-    price INT NOT NULL DEFAULT 0,
+    price INT NOT NULL DEFAULT 0, -- TODO: change price to NUMERIC
     capacity INT NOT NULL DEFAULT 2,
     is_sea_view BOOLEAN NOT NULL DEFAULT false,
     is_mountain_view BOOLEAN NOT NULL DEFAULT false,
-    is_extendible BOOLEAN NOT NULL DEFAULT false,
+    is_extendible BOOLEAN NOT NULL DEFAULT false, -- TODO: add BOOLEAN column "booked"
     PRIMARY KEY(room_id, hotel_id),
     UNIQUE(room_id),
     FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
@@ -144,7 +144,8 @@ CREATE TABLE account (
     account_id SERIAL PRIMARY KEY,
     username VARCHAR(50),
     password VARCHAR(50),
-    role INT CHECK (role >= 1 and role <= 3) -- 1 = admin, 2 = employee, 3 = customer
+    role INT CHECK (role >= 1 and role <= 3), -- 1 = admin, 2 = employee, 3 = customer
+    UNIQUE(username) -- Should probably change this to use username as PK and remove account_id
 );
 
 ALTER TABLE customer

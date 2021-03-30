@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import eHotel.connections.PostgreSqlConn;
-import eHotel.entities.Room;
-import eHotel.entities.Employee;
+import eHotel.entities.*;
 
 public class CustomerloginServlet extends HttpServlet {
 
@@ -22,23 +21,21 @@ public class CustomerloginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 //		employee account = new employee();
-		String userSSN = req.getParameter("userSSN");
+		String username = req.getParameter("username");
 		String pwd = req.getParameter("pwd");
 		
-		PostgreSqlConn con = new PostgreSqlConn();
+		PostgreSqlConn conn = new PostgreSqlConn();
 //		[0]:name,[1]:pwd
-		String[] pwdfromdb = con.getuserinforbycustSSN(userSSN);
+		// String pwdFromDB = conn.getPasswordByUsername(username);
+		Account account = conn.getAccountFromUsername(username);
 		
-		
-		
-		if (pwd.equals(pwdfromdb[1])) {			
+		if (pwd.equals(account.getPassword())) {
+			Customer cust = conn.getCustomerFromAccountID(account.getAccountID());
 			
-			ArrayList<Room> bookedRooms = con.getbookedRooms(userSSN);
+			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(cust.getCustomerID());
+			ArrayList<Room> allRooms = conn.getAllAvailRooms();
 			
-			ArrayList<Room> allRooms = con.getAllAvailRooms();
-			
-			
-			req.setAttribute("CustName", pwdfromdb[0]);
+			req.setAttribute("CustName", cust.getFirstName());
 			req.setAttribute("bookedRooms", bookedRooms);
 			req.setAttribute("allRooms", allRooms);
 

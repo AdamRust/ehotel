@@ -6,7 +6,7 @@ public class Room {
 	
 	private int room_id;
 	private int hotel_id;
-	private int price;
+	private int price; // TODO: Change to float
 	private int capacity;
 	private boolean is_sea_view;
 	private boolean is_mountain_view;
@@ -29,19 +29,19 @@ public class Room {
 		this.amenities = new ArrayList<Integer>();
 	}
 
-	public int getRoom_id() {
+	public int getRoomID() {
 		return room_id;
 	}
 
-	public void setRoom_id(int room_id) {
+	public void setRoomID(int room_id) {
 		this.room_id = room_id;
 	}
 	
-	public int getHotel_id() {
+	public int getHotelID() {
 		return hotel_id;
 	}
 
-	public void setHotel_id(int hotel_id) {
+	public void setHotelID(int hotel_id) {
 		this.hotel_id = hotel_id;
 	}
 	
@@ -61,27 +61,27 @@ public class Room {
 		this.capacity = capacity;
 	}
 	
-	public boolean getIs_sea_view() {
+	public boolean getIsSeaView() {
 		return is_sea_view;
 	}
 
-	public void setIs_sea_view(boolean is_sea_view) {
+	public void setIsSeaView(boolean is_sea_view) {
 		this.is_sea_view = is_sea_view;
 	}
 	
-	public boolean getIs_mountain_view() {
+	public boolean getIsMountainView() {
 		return is_mountain_view;
 	}
 
-	public void setIs_mountain_view(boolean is_mountain_view) {
+	public void setIsMountainView(boolean is_mountain_view) {
 		this.is_mountain_view = is_mountain_view;
 	}
 	
-	public boolean getIs_extendible() {
+	public boolean getIsExtendible() {
 		return is_extendible;
 	}
 
-	public void setIs_extendible(boolean is_extendible) {
+	public void setIsExtendible(boolean is_extendible) {
 		this.is_extendible = is_extendible;
 	}
 	

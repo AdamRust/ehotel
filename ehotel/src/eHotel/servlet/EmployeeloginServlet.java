@@ -22,8 +22,8 @@ public class EmployeeloginServlet extends HttpServlet {
 		String username = req.getParameter("username");
 		String pwd = req.getParameter("pwd");
 		
-		PostgreSqlConn con = new PostgreSqlConn();
-		String pwdfromdb = con.getpwdbyUname(username);
+		PostgreSqlConn conn = new PostgreSqlConn();
+		String pwdfromdb = conn.getPasswordByUsername(username);
 		
 		
 		if (pwd.equals(pwdfromdb)) {			

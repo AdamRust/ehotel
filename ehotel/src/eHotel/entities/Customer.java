@@ -3,7 +3,7 @@ package eHotel.entities;
 public class Customer {
 	
 	private int customer_id;
-	private String address_id;
+	private int address_id;
 	private String first_name;
 	private String middle_initial;
 	private String last_name;
@@ -15,7 +15,7 @@ public class Customer {
 		
 	}
 	
-	public Customer(int customer_id, String address_id, String first_name, String middle_initial,
+	public Customer(int customer_id, int address_id, String first_name, String middle_initial,
 			String last_name, String sin, String registration_date, int account_id) {
 		this.customer_id = customer_id;
 		this.address_id = address_id;
@@ -27,43 +27,43 @@ public class Customer {
 		this.account_id = account_id;
 	}
 
-	public int getCustomer_id() {
+	public int getCustomerID() {
 		return customer_id;
 	}
 
-	public void setCustomer_id(int customer_id) {
+	public void setCustomerID(int customer_id) {
 		this.customer_id = customer_id;
 	}
 
-	public String getAddress_id() {
+	public int getAddressID() {
 		return address_id;
 	}
 
-	public void setAddress_id(String address_id) {
+	public void setAddressID(int address_id) {
 		this.address_id = address_id;
 	}
 
-	public String getFirst_name() {
+	public String getFirstName() {
 		return first_name;
 	}
 
-	public void setFirst_name(String first_name) {
+	public void setFirstName(String first_name) {
 		this.first_name = first_name;
 	}
 	
-	public String getMiddle_initial() {
+	public String getMiddleInitial() {
 		return middle_initial;
 	}
 
-	public void setMiddle_initial(String middle_initial) {
+	public void setMiddleInitial(String middle_initial) {
 		this.middle_initial = middle_initial;
 	}
 	
-	public String getLast_name() {
+	public String getLastName() {
 		return last_name;
 	}
 
-	public void setLast_name(String last_name) {
+	public void setLastName(String last_name) {
 		this.last_name = last_name;
 	}
 	
@@ -75,19 +75,19 @@ public class Customer {
 		this.sin = sin;
 	}
 	
-	public String getRegistration_date() {
+	public String getRegistrationDate() {
 		return registration_date;
 	}
 
-	public void setRegistration_date(String registration_date) {
+	public void setRegistrationDate(String registration_date) {
 		this.registration_date = registration_date;
 	}
 	
-	public int getAccount_id() {
+	public int getAccountID() {
 		return account_id;
 	}
 
-	public void setAccount_id(int account_id) {
+	public void setAccountID(int account_id) {
 		this.account_id = account_id;
 	}
 }

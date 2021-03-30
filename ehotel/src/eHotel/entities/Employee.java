@@ -36,51 +36,51 @@ public class Employee {
 		this.email = email;
 	}
 
-	public int getEmployee_id() {
+	public int getEmployeeID() {
 		return employee_id;
 	}
 
-	public void setEmployee_id(int employee_id) {
+	public void setEmployeeID(int employee_id) {
 		this.employee_id = employee_id;
 	}
 
-	public int getHotel_id() {
+	public int getHotelID() {
 		return hotel_id;
 	}
 
-	public void setHotel_id(int hotel_id) {
+	public void setHotelID(int hotel_id) {
 		this.hotel_id = hotel_id;
 	}
 	
-	public int getAddress_id() {
+	public int getAddressID() {
 		return address_id;
 	}
 
-	public void setAddress_id(int address_id) {
+	public void setAddressID(int address_id) {
 		this.address_id = address_id;
 	}
 	
-	public String getFirst_name() {
+	public String getFirstName() {
 		return first_name;
 	}
 
-	public void setFirst_name(String first_name) {
+	public void setFirstName(String first_name) {
 		this.first_name = first_name;
 	}
 	
-	public String getMiddle_initial() {
+	public String getMiddleInitial() {
 		return middle_initial;
 	}
 
-	public void setMiddle_initial(String middle_initial) {
+	public void setMiddleInitial(String middle_initial) {
 		this.middle_initial = middle_initial;
 	}
 	
-	public String getLast_name() {
+	public String getLastName() {
 		return last_name;
 	}
 
-	public void setLast_name(String last_name) {
+	public void setLastName(String last_name) {
 		this.last_name = last_name;
 	}
 	
@@ -108,19 +108,19 @@ public class Employee {
 		this.position = position;
 	}
 	
-	public int getAccount_id() {
+	public int getAccountID() {
 		return account_id;
 	}
 
-	public void setAccount_id(int account_id) {
+	public void setAccountID(int account_id) {
 		this.account_id = account_id;
 	}
 
-	public String getPhone_num() {
+	public String getPhoneNum() {
 		return phone_num;
 	}
 
-	public void setPhone_num(String phone_num) {
+	public void setPhoneNum(String phone_num) {
 		this.phone_num = phone_num;
 	}
 	
