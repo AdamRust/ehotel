@@ -138,7 +138,7 @@ CREATE TABLE employee_email (
     FOREIGN KEY(employee_id) REFERENCES employee(employee_id) ON DELETE CASCADE
 );
 
--- Creating a separate table to store login/account information (adding account_id FK to Customer and Employee).
+-- Creating a separate table to store login/account information (adding account_id FK to Customer and Employee). 
 -- NOTE: This table will not be secured at all, NO ACTUAL PASSWORDS SHOULD BE STORED in it.
 CREATE TABLE account (
     account_id SERIAL PRIMARY KEY,
