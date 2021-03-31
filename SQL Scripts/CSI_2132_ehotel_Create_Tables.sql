@@ -15,19 +15,19 @@ CREATE TABLE hotel_brand (
 );
 
 CREATE TABLE hotel (
-    hotel_id INT,
+    hotel_id INT, -- TODO: Change hotel_id to PK
     brand_id INT,
     manager_id INT NOT NULL,
     address_id INT NOT NULL,
     star_category INT CONSTRAINT hotel_star_range CHECK (star_category >= 1 AND star_category <= 5),
     PRIMARY KEY(hotel_id, brand_id),
-    UNIQUE (hotel_id),
+    UNIQUE (hotel_id), -- TODO: Remove unique constraint, replaced by PK constraint
     FOREIGN KEY(brand_id) REFERENCES hotel_brand(brand_id) ON DELETE CASCADE,
     FOREIGN KEY(address_id) REFERENCES address(address_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE employee (
-    employee_id INT,
+    employee_id INT, -- TODO: Change employee_id to PK
     hotel_id INT NOT NULL,
     address_id INT NOT NULL,
     first_name VARCHAR(50) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE employee (
     salary INT,
     position VARCHAR(50),
     PRIMARY KEY(employee_id, hotel_id),
-    UNIQUE(employee_id),
+    UNIQUE(employee_id), -- TODO: Remove unique constraint, replaced by PK constraint
     FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE,
     FOREIGN KEY(address_id) REFERENCES address(address_id) ON DELETE RESTRICT
 );
@@ -54,22 +54,22 @@ CREATE TABLE address (
 );
 
 CREATE TABLE room (
-    room_id INT,
+    room_id INT, -- TODO: Change room_id to PK, add room_name column
     hotel_id INT,
     price INT NOT NULL DEFAULT 0, -- TODO: change price to NUMERIC
     capacity INT NOT NULL DEFAULT 2,
     is_sea_view BOOLEAN NOT NULL DEFAULT false,
     is_mountain_view BOOLEAN NOT NULL DEFAULT false,
-    is_extendible BOOLEAN NOT NULL DEFAULT false, -- TODO: add BOOLEAN column "booked"
+    is_extendible BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY(room_id, hotel_id),
-    UNIQUE(room_id),
+    UNIQUE(room_id), -- TODO: Remove unique constraint, replaced by PK constraint
     FOREIGN KEY(hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
 );
 
 CREATE TABLE room_amenities (
     room_id INT,
     amenity_type INT CONSTRAINT room_amenity_above_zero CHECK (amenity_type >= 0),
-    PRIMARY KEY(room_id, amenity_type),
+    PRIMARY KEY(room_id, amenity_type), -- This PK remains the same
     FOREIGN KEY(room_id) REFERENCES room(room_id) ON DELETE CASCADE
 );
 
@@ -87,7 +87,7 @@ CREATE TABLE customer (
 CREATE TABLE booking (
     booking_id SERIAL PRIMARY KEY,
     customer_id INT NOT NULL,
-    room_id INT NOT NULL, -- TODO: Add hotel_id?
+    room_id INT NOT NULL, -- TODO: Add hotel_id? (Not necessary after room_id becomes PK)
     booking_date DATE NOT NULL DEFAULT CURRENT_DATE,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL,
@@ -145,9 +145,9 @@ CREATE TABLE account (
     username VARCHAR(50),
     password VARCHAR(50),
     role INT CHECK (role >= 1 and role <= 3), -- 1 = admin, 2 = employee, 3 = customer
-    UNIQUE(username) -- Should probably change this to use username as PK and remove account_id
+    UNIQUE(username) -- TODO: Change to use username as PK and remove account_id
 );
-
+ -- TODO: Modify the account_id columns to store username instead
 ALTER TABLE customer
 ADD COLUMN account_id INT NOT NULL;
 
