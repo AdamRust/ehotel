@@ -1,7 +1,6 @@
 package eHotel.entities;
 
 public class Account {
-	private int account_id;
 	private String password;
 	private String username;
 	private int role;
@@ -10,18 +9,10 @@ public class Account {
 		
 	}
 	
-	public Account(int account_id, String password, String username, int role) {
-		this.account_id = account_id;
+	public Account(String username, String password, int role) {
 		this.password = password;
 		this.username = username;
 		this.role = role;
-	}
-	
-	public int getAccountID() {
-		return this.account_id;
-	}
-	public void setAccountID(int new_account_id) {
-		this.account_id = new_account_id;
 	}
 	
 	public String getUsername() {

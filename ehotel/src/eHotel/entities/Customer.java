@@ -9,14 +9,14 @@ public class Customer {
 	private String last_name;
 	private String sin;
 	private String registration_date;
-	private int account_id;
+	private String username;
 	
 	public Customer() {
 		
 	}
 	
 	public Customer(int customer_id, int address_id, String first_name, String middle_initial,
-			String last_name, String sin, String registration_date, int account_id) {
+			String last_name, String sin, String registration_date, String username) {
 		this.customer_id = customer_id;
 		this.address_id = address_id;
 		this.first_name = first_name;
@@ -24,7 +24,7 @@ public class Customer {
 		this.last_name = last_name;
 		this.sin = sin;
 		this.registration_date = registration_date;
-		this.account_id = account_id;
+		this.username = username;
 	}
 
 	public int getCustomerID() {
@@ -83,11 +83,11 @@ public class Customer {
 		this.registration_date = registration_date;
 	}
 	
-	public int getAccountID() {
-		return account_id;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAccountID(int account_id) {
-		this.account_id = account_id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Room {
 	
-	private int room_id;
+	private int room_id; // Primary Key
 	private int hotel_id;
-	private int price; // TODO: Change to float
+	private float price; // TODO: Change to float
 	private int capacity;
 	private boolean is_sea_view;
 	private boolean is_mountain_view;
@@ -18,7 +18,7 @@ public class Room {
 		
 	}
 	
-	public Room(int room_id, int hotel_id, int price, int capacity, boolean is_sea_view, boolean is_mountain_view, boolean is_extendible) {
+	public Room(int room_id, int hotel_id, float price, int capacity, boolean is_sea_view, boolean is_mountain_view, boolean is_extendible) {
 		this.room_id = room_id;
 		this.hotel_id = hotel_id;
 		this.price = price;
@@ -45,11 +45,11 @@ public class Room {
 		this.hotel_id = hotel_id;
 	}
 	
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	

@@ -16,13 +16,13 @@ ALTER TABLE customer
 DROP CONSTRAINT fk_customer_account;
 
 ALTER TABLE customer
-DROP COLUMN account_id INT NOT NULL;
+DROP COLUMN account_id;
 
 ALTER TABLE employee
 DROP CONSTRAINT fk_employee_account;
 
 ALTER TABLE employee
-DROP COLUMN account_id INT NOT NULL;
+DROP COLUMN account_id;
 
 ALTER TABLE account
 DROP CONSTRAINT account_pkey;
@@ -57,8 +57,8 @@ DROP CONSTRAINT hotel_pkey;
 ALTER TABLE hotel
 ADD PRIMARY KEY(hotel_id);
 
-ALTER TABLE hotel
-DROP CONSTRAINT unique_hotel_id;
+-- ALTER TABLE hotel
+-- DROP CONSTRAINT unique_hotel_id;
 
 -- Modify Employee to have a single PK column and a FK to Hotel, instead of a composite key of these 2 columns
 ALTER TABLE employee
@@ -67,8 +67,8 @@ DROP CONSTRAINT employee_pkey;
 ALTER TABLE employee
 ADD PRIMARY KEY(employee_id);
 
-ALTER TABLE employee
-DROP CONSTRAINT unique_employee_id;
+-- ALTER TABLE employee
+-- DROP CONSTRAINT unique_employee_id;
 
 -- Modify Room to have a single PK column and a FK to Hotel, instead of a composite key of these 2 columns
 ALTER TABLE room
@@ -77,8 +77,8 @@ DROP CONSTRAINT room_pkey;
 ALTER TABLE room
 ADD PRIMARY KEY(room_id);
 
-ALTER TABLE room
-DROP CONSTRAINT unique_room_id;
+-- ALTER TABLE room
+-- DROP CONSTRAINT unique_room_id;
 
 -- Change datatype of Price from INT to NUMERIC
 ALTER TABLE room
@@ -87,4 +87,4 @@ ALTER COLUMN price TYPE NUMERIC USING price::NUMERIC;
 -- Add column room_num to Room to store the number of each room within its associated hotel
 -- Using VARCHAR as we could have rooms such as "13A" or maybe even "Penthouse"
 ALTER TABLE room
-ADD COLUMN room_num VARCHAR(50) NOT NULL;
+ADD COLUMN room_name VARCHAR(50) NOT NULL;

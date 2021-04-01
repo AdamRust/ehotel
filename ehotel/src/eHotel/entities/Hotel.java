@@ -2,7 +2,7 @@ package eHotel.entities;
 
 public class Hotel {
 	
-	private int hotel_id;
+	private int hotel_id; // Primary Key
     private int brand_id;
     private int manager_id;
     private int address_id;

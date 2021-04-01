@@ -30,7 +30,7 @@ public class CustomerLoginServlet extends HttpServlet {
 		Account account = conn.getAccountFromUsername(username);
 		
 		if (pwd.equals(account.getPassword())) {
-			Customer cust = conn.getCustomerFromAccountID(account.getAccountID());
+			Customer cust = conn.getCustomerFromUsername(username);
 			
 			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(cust.getCustomerID());
 			ArrayList<Room> allRooms = conn.getAllAvailRooms();

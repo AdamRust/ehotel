@@ -2,7 +2,7 @@ package eHotel.entities;
 
 public class Employee {
 	
-	private int employee_id;
+	private int employee_id; // Primary Key
 	private int hotel_id;
 	private int address_id;
 	private String first_name;
@@ -11,7 +11,7 @@ public class Employee {
 	private String sin;
 	private int salary;
 	private String position;
-	private int account_id;
+	private String username;
 	// Email and Phone Number stored in separate tables in DB
 	private String phone_num;
 	private String email; 
@@ -21,7 +21,7 @@ public class Employee {
 	}
 	
 	public Employee(int employee_id, int hotel_id, int address_id, String first_name, String middle_initial, 
-			String last_name, String sin, int salary, String position, int account_id, String phone_num, String email) {
+			String last_name, String sin, int salary, String position, String username, String phone_num, String email) {
 		this.employee_id = employee_id;
 		this.hotel_id = hotel_id;
 		this.address_id = address_id;
@@ -31,7 +31,7 @@ public class Employee {
 		this.sin = sin;
 		this.salary = salary;
 		this.position = position;
-		this.account_id = account_id;
+		this.username = username;
 		this.phone_num = phone_num;
 		this.email = email;
 	}
@@ -108,12 +108,12 @@ public class Employee {
 		this.position = position;
 	}
 	
-	public int getAccountID() {
-		return account_id;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAccountID(int account_id) {
-		this.account_id = account_id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPhoneNum() {
