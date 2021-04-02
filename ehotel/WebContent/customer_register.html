@@ -2,6 +2,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css" />
 <title>customer register page</title>
 <script>
 	// TODO: Enhance this if we have time.
@@ -32,8 +35,10 @@
 </script>
 </head>
 <body>
-	<h2>New Customer:</h2>
+	<h2 class = header>New Customer:</h2>
+
 	<form method = "post" action="cusRegister">
+		<div class =mainelem>
 		<p>All fields required... for now.</p>
 		<section>
 			<h3>Account Information:</h3>
@@ -150,6 +155,7 @@
 				<button type="reset" value="reset">Reset</button>
 			</p>
 		</section>
+	</div>
 	</form>
 </body>
 </html>
