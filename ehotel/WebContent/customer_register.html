@@ -4,25 +4,26 @@
 <meta charset="ISO-8859-1">
 <title>customer register page</title>
 <script>
-
+	// TODO: Enhance this if we have time.
 	function validate() {
-		var custSSN = document.getElementById("custSSN");
-		var custName = document.getElementById("custName");
-		var custPwd = document.getElementById("custPwd");
-		var custPwdagain = document.getElementById("custPwdagain");
-		if(custSSN.value == "" || custName.value == "" || custPwd.value == "" || custPwdagain.value == "" ){
+		var custUsername = document.getElementById("custAcc_Username");
+		var custPwd = document.getElementById("custAcc_Pwd");
+		var custConfirmPwd = document.getElementById("custAcc_ConfirmPwd");
+		var custMidInit = document.getElementById("custMidInit");
+		if(custUsername.value == "" || custPwd.value == "" || custConfirmPwd.value == "" ){
 			alert("You need to fill all the information");
 			return false;
 		}
-		
-		else if(custSSN.value.length != 8){
-			alert("The length of SSN needs to be 8");
+		else if(custSin.value.length != 9){
+			alert("SIN must be 9 characters.");
 			return false;
 		}
-		
-		else if(custPwd.value != custPwdagain.value){
-			alert("passwords need to be same");
+		else if(custPwd.value != custConfirmPwd.value){
+			alert("Passwords must be the same.");
 			return false;
+		}
+		else if(custMidInit.value.length > 3){
+			alert("Middle initial must be less than 3 characters.")
 		}
 		else
 			return true;
@@ -31,14 +32,124 @@
 </script>
 </head>
 <body>
-<form method = "post" action="cusRegister">
-please input your SSN:<input type="text" id="custSSN" name="custSSN"><br><br>
-please input your name:<input type="text" id="custName" name="custName"><br><br>
-please input your password:<input type="password" id="custPwd" name="custPwd"><br><br>
-please input your password again:<input type="password" id="custPwdagain" name="custPwdagain"><br><br>
-<button type="submit" value="submit" onclick="return validate();">submit</button>
-<button type="reset" value="reset">reset</button>
-</form>
-
+	<h2>New Customer:</h2>
+	<form method = "post" action="cusRegister">
+		<p>All fields required... for now.</p>
+		<section>
+			<h3>Account Information:</h3>
+			<p>
+				<label for="custAcc_Username">
+					<span>Username: </span>
+				</label>
+				<input type="text" id="custAcc_Username" name="custAcc_Username">
+			</p>
+			<p>
+				<label for="custAcc_Pwd">
+					<span>Password: </span>
+				</label>
+				<input type="text" id="custAcc_Pwd" name="custAcc_Pwd">
+				
+			</p>
+			<p>
+				<label for="custAcc_ConfirmPwd">
+					<span>Confirm Password: </span>
+				</label>
+				<input type="text" id="custConfirmPwd" name="custConfirmPwd">
+				
+			</p>
+		</section>
+		<section>
+			<h3>Customer Information:</h3>
+			<p>
+				<label for="custFirstName">
+					<span>First Name: </span>
+				</label>
+				<input type="text" id="custFirstName" name="custFirstName">
+			</p>
+			<p>
+				<label for="custMidInit">
+					<span>Middle Initial: </span>
+				</label>
+				<input type="text" id="custMidInit" name="custMidInit">
+			</p>
+			<p>
+				<label for="custLastName">
+					<span>Last Name: </span>
+				</label>
+				<input type="text" id="custLastName" name="custLastName">
+			</p>
+			<p>
+				<label for="custSin">
+					<span>SIN: </span>
+				</label>
+				<input type="text" id="custSin" name="custSin">
+			</p>
+		</section>
+		<section>
+			<h3>Address:</h3>
+			<p>
+				<label for="custAddr_Street">
+					<span>Street: </span>
+				</label>
+				<input type="text" id="custAddr_Street" name="custAddr_Street">
+			</p>
+			<p>
+				<label for="custAddr_StreetNum">
+					<span>Street Number: </span>
+				</label>
+				<input type="text" id="custAddr_StreetNum" name="custAddr_StreetNum">
+			</p>
+			<p>
+				<label for="custAddr_UnitNum">
+					<span>Unit Num: </span>
+				</label>
+				<input type="text" id="custAddr_UnitNum" name="custAddr_UnitNum">
+			</p>
+			<p>
+				<label for="custAddr_PostalCode">
+					<span>Postal Code: </span>
+				</label>
+				<input type="text" id="custAddr_PostalCode" name="custAddr_PostalCode">
+			</p>
+			<p>
+				<label for="custAddr_City">
+					<span>City: </span>
+				</label>
+				<input type="text" id="custAddr_City" name="custAddr_City">
+			</p>
+			<p>
+				<label for="custAddr_State">
+					<span>Province: </span>
+				</label>
+				<select id="custAddr_State" name="custAddr_State">
+					<option value="Alberta">Alberta</option>
+					<option value="Alberta">British Columbia</option>
+					<option value="Alberta">Manitoba</option>
+					<option value="Alberta">New Brunswick</option>
+					<option value="Alberta">Newfoundland and Labrador</option>
+					<option value="Alberta">Northwest Territories</option>
+					<option value="Alberta">Nova Scotia</option>
+					<option value="Alberta">Nunavut</option>
+					<option value="Alberta">Ontario</option>
+					<option value="Alberta">Prince Edward Island</option>
+					<option value="Alberta">Quebec</option>
+					<option value="Alberta">Saskatchewan</option>
+					<option value="Alberta">Yukon</option>
+				</select>
+			</p>
+			<p>
+				<label for="custAddr_Country">
+					<span>Country: </span>
+				</label>
+				<input type="text" id="custAddr_Country" name="custAddr_Country">
+			</p>
+		</section>
+		<section>
+			<p>
+				<button type="submit" value="submit" onclick="return validate();">Submit</button>
+				<button type="reset" value="reset">Reset</button>
+			</p>
+		</section>
+	</form>
 </body>
 </html>

@@ -151,8 +151,11 @@ public class PostgreSqlConn{
 				String custAddr_State, String custAddr_Country) {
 			getConn();
 			
+			int success = -1;
 			int new_addr_id = -1;
 			int new_cust_id = -1;
+			PreparedStatement ps2 = null;
+			PreparedStatement ps3 = null;
 			
 			try {
 				// Prepare SQL for new Account
@@ -164,37 +167,45 @@ public class PostgreSqlConn{
 				ps.executeUpdate();
 				
 				// Prepare SQL for new Address
-				ps = db.prepareStatement(SQL.INSERT_NEW_ADDRESS);
-				ps.setString(1, custAddr_StreetName);
-				ps.setString(2, custAddr_StreetNum);
-				ps.setString(3, custAddr_UnitNum);
-				ps.setString(4, custAddr_PostalCode);
-				ps.setString(5, custAddr_City);
-				ps.setString(6, custAddr_State);
-				ps.setString(7, custAddr_Country);
+				ps2 = db.prepareStatement(SQL.INSERT_NEW_ADDRESS, Statement.RETURN_GENERATED_KEYS);
+				ps2.setString(1, custAddr_StreetName);
+				ps2.setString(2, custAddr_StreetNum);
+				ps2.setString(3, custAddr_UnitNum);
+				ps2.setString(4, custAddr_PostalCode);
+				ps2.setString(5, custAddr_City);
+				ps2.setString(6, custAddr_State);
+				ps2.setString(7, custAddr_Country);
 				// Execute query
-				result = ps.executeQuery();
-				// Retrieve account_id for new Account
-				if (result.next()) {
-					new_addr_id = result.getInt(1);
-				}
 				
+				success = ps2.executeUpdate();
+				if (success == 1) {
+					result = ps2.getGeneratedKeys();
+					// Retrieve account_id for new Account
+					if (result.next()) {
+						new_addr_id = result.getInt("address_id");
+					}
+				}
+	
 				// Prepare SQL for new Customer
-				ps = db.prepareStatement(SQL.INSERT_NEW_CUSTOMER);
-				ps.setInt(1, new_addr_id);
-				ps.setString(2, custFirstName);
-				ps.setString(3, custMidInit);
-				ps.setString(4, custLastName);
-				ps.setString(5, custSin);
-				ps.setDate(6, custRegDate);
-				ps.setString(7, custAcc_Username);
+				ps3 = db.prepareStatement(SQL.INSERT_NEW_CUSTOMER, Statement.RETURN_GENERATED_KEYS);
+				ps3.setInt(1, new_addr_id);
+				ps3.setString(2, custFirstName);
+				ps3.setString(3, custMidInit);
+				ps3.setString(4, custLastName);
+				ps3.setString(5, custSin);
+				ps3.setDate(6, custRegDate);
+				ps3.setString(7, custAcc_Username);
 				// Execute query
-				result = ps.executeQuery();
-				// Retrieve account_id for new Account
-				if (result.next()) {
-					new_cust_id = result.getInt("customer_id");
+				success = ps3.executeUpdate();
+				if (success == 1) {
+					result = ps3.getGeneratedKeys();
+					// Retrieve account_id for new Account
+					if (result.next()) {
+						new_cust_id = result.getInt("customer_id");
+					}
 				}
-				
+				ps2.close();
+				ps3.close();
 			} catch(SQLException e) {
 				e.printStackTrace();
 			} finally {

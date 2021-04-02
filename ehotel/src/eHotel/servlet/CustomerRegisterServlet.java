@@ -35,11 +35,11 @@ public class CustomerRegisterServlet extends HttpServlet{
 		Date currDate = new Date(); // Get current date
 		java.sql.Date custRegDate = new java.sql.Date(currDate.getTime()); // Set registration date to current date
 		// Account info
-		String custAcc_Userame = req.getParameter("custAcc_Userame");
+		String custAcc_Username = req.getParameter("custAcc_Username");
 		String custAcc_Pwd = req.getParameter("custAcc_Pwd");
 		int custAcc_Role = 3; // Customer role = 3
 		//Address info
-		String custAddr_StreetName = req.getParameter("custAddr_StreetName");
+		String custAddr_StreetName = req.getParameter("custAddr_Street");
 		String custAddr_StreetNum = req.getParameter("custAddr_StreetNum");
 		String custAddr_UnitNum = req.getParameter("custAddr_UnitNum");
 		String custAddr_PostalCode = req.getParameter("custAddr_PostalCode");
@@ -49,7 +49,7 @@ public class CustomerRegisterServlet extends HttpServlet{
 		
 		try {
 			int newCustID = conn.createNewCustomer(custFirstName, custMidInit, custLastName, custSin, custRegDate, 
-					custAcc_Userame, custAcc_Pwd, custAcc_Role, custAddr_StreetName, custAddr_StreetNum, custAddr_UnitNum,
+					custAcc_Username, custAcc_Pwd, custAcc_Role, custAddr_StreetName, custAddr_StreetNum, custAddr_UnitNum,
 					custAddr_PostalCode, custAddr_City, custAddr_State, custAddr_Country);
 			
 			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(newCustID);
@@ -58,7 +58,8 @@ public class CustomerRegisterServlet extends HttpServlet{
 			
 			System.out.println(allRooms);
 			
-			req.setAttribute("custName", custFirstName);
+			req.setAttribute("custFirstName", custFirstName);
+			req.setAttribute("custLastName", custLastName);
 			req.setAttribute("bookedRooms", bookedRooms);
 			req.setAttribute("allRooms", allRooms);
 

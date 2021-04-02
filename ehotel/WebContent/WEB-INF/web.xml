@@ -5,8 +5,7 @@
   <description></description>
   <display-name>kkkkk</display-name>
   <servlet-name>loginServlet</servlet-name>
-  <servlet-class>
-  eHotel.servlet.EmployeeloginServlet</servlet-class>
+  <servlet-class>eHotel.servlet.EmployeeLoginServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>loginServlet</servlet-name>
@@ -29,7 +28,7 @@
  <description></description>
  <display-name>custlogin</display-name>
  <servlet-name>custloginServlet</servlet-name>
- <servlet-class>eHotel.servlet.CustomerloginServlet</servlet-class>
+ <servlet-class>eHotel.servlet.CustomerLoginServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>custloginServlet</servlet-name>
@@ -40,7 +39,7 @@
  <description></description>
  <display-name>roombook</display-name>
  <servlet-name>roombookServlet</servlet-name>
- <servlet-class>eHotel.servlet.RoombookServlet</servlet-class>
+ <servlet-class>eHotel.servlet.RoomBookServlet</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>roombookServlet</servlet-name>

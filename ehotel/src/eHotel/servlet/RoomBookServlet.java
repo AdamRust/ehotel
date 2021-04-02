@@ -14,7 +14,7 @@ import eHotel.connections.PostgreSqlConn;
 import eHotel.entities.Room;
 import eHotel.entities.Employee;
 
-public class RoombookServlet extends HttpServlet {
+public class RoomBookServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);

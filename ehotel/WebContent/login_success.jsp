@@ -7,8 +7,8 @@
 </head>
 <body>
 <%
-String employee_id = (String)request.getParameter("employee_id");
+String empUsername = (String)request.getParameter("empUsername");
 %>
-	<h4>Welcome,<%=employee_id%><h4>
+	<h4>Welcome,<%=empUsername%>!<h4>
 </body>
 </html>

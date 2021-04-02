@@ -20,17 +20,18 @@ public class EmployeeLoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 //		employee account = new employee();
-		String username = req.getParameter("username");
-		String pwd = req.getParameter("pwd");
+		String username = req.getParameter("empAcc_Username");
+		String pwd = req.getParameter("empAcc_Pwd");
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
 		Account account = conn.getAccountFromUsername(username);
 		
 		
-		if (pwd.equals(account.getPassword())) {			
+		if (pwd.equals(account.getPassword())) {		
 				System.out.println("success");
-				req.setAttribute("employee_id", username);
-				resp.sendRedirect("login_success.jsp?employee_id="+username);
+				// req.setAttribute("empFirstName", username);
+				// req.setAttribute("empLastName", username);
+				resp.sendRedirect("login_success.jsp?empUsername="+username);
 				return;			
 		}
 		resp.sendRedirect("login_failure.jsp");

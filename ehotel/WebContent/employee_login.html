@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Customer Login</title>
+<title>Employee Login</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Language" content="ch-cn">
 <script>
 function validate() {
-	var username = document.getElementById("custAcc_Username");
-	var password = document.getElementById("custAcc_Pwd");
+	var username = document.getElementById("empAcc_Username");
+	var password = document.getElementById("empAcc_Pwd");
 	if(username.value == ""){
 		alert("Username is required.");
 		return false;
@@ -20,20 +20,20 @@ function validate() {
 </script>
 </head>
 <body>
-	<h2>Customer Login:</h2>
+	<h2>Employee Login:</h2>
 	<form>
 		<section>
 			<p>
-				<label for="custAcc_Username">
+				<label for="empAcc_Username">
 					<span>Username: </span>
 				</label>
-				<input type="text" id="custAcc_Username" name="custAcc_Username">
+				<input type="text" id="empAcc_Username" name="empAcc_Username">
 			</p>
 			<p>
-				<label for="custAcc_Pwd">
+				<label for="empAcc_Pwd">
 					<span>Password: </span>
 				</label>
-				<input type="text" id="custAcc_Pwd" name="custAcc_Pwd">
+				<input type="text" id="empAcc_Pwd" name="empAcc_Pwd">
 				
 			</p>
 		</section>
