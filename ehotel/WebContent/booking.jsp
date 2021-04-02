@@ -7,6 +7,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Booking Page</title>
+<script>
+	function getRoomId(){
+		var id = document.getElementById('getRoomId').value;
+		alert(id);
+	}
+</script>
 </head>
 <body>
 
@@ -15,48 +21,110 @@
 		String custLastName = (String) request.getAttribute("custLastName");
 	%>
 	<h2>Welcome, <%=custFirstName%> <%=custLastName%>!</h2>
-	<form method="post" action="roombook">
-			<h3>Here are the room(s) you booked</h3>
-			<ul>
-				<%
-					Object obj1 = request.getAttribute("bookedRooms");
-					ArrayList<Room> broomList = null;
-					if (obj1 instanceof ArrayList) {
-						broomList = (ArrayList<Room>) obj1;
-					}
-					if (broomList != null) {
-						for (Room room : broomList) {
-							String roominfo = room.getRoomID() + "---" + room.getHotelID();
-				%>
-							<li><%=roominfo%></li>
-				<%
-						}
-					}
-				%>
-			</ul>
-			
-			<h3>Here are avaiable rooms</h3>
-			<select name = "roomno">
-				<%
-					Object obj = request.getAttribute("allRooms");
-					ArrayList<Room> roomList = null;
-					if (obj instanceof ArrayList) {
-						roomList = (ArrayList<Room>) obj;
-					}
-					if (roomList != null) {
-						for (Room room : roomList) {
-							String roominfo = room.getRoomID() + "---" + room.getHotelID();
-				%>					
-				<option><%=room.getRoomID()%></option>
-
-				<%
-					}
-					}
-				%>
-			</select>
-			<button type="submit" onclick="return confirm('book?');">book</button>
-	</form>
-
+	
+	<h3>You're booked rooms:</h3>
+	<table>
+		<tr>
+			<th>Room Number</th>
+			<th>Hotel</th>
+			<th>Capacity</th>
+			<th>Extendible</th>
+			<th>Sea View</th>
+			<th>Mountain View</th>
+			<th>Price</th>
+		</tr>
+		<%
+		Object bookedRooms = request.getAttribute("bookedRooms");
+		ArrayList<Room> bRoomsList = null;
+		if (bookedRooms instanceof ArrayList) {
+			bRoomsList = (ArrayList<Room>) bookedRooms;
+		}
+		else {
+			bRoomsList = new ArrayList<Room>();
+		}
+		for (Room room : bRoomsList) {
+		%>
+		<tr>
+			<td>
+				<%=room.getRoomName()%>
+			</td>
+			<td>
+				<%=room.getHotelID()%>
+			</td>
+			<td>
+				<%=room.getCapacity()%>
+			</td>
+			<td>
+				<%=room.getIsExtendible()%>
+			</td>
+			<td>
+				<%=room.getIsSeaView()%>
+			</td>
+			<td>
+				<%=room.getIsMountainView()%>
+			</td>
+			<td>
+				<%=room.getPrice()%>
+			</td>
+		</tr>
+		<%
+		}
+		%>
+	</table>
+	
+	<h3>Available rooms:</h3>
+	<table>
+		<tr>
+			<th>Room Number</th>
+			<th>Hotel</th>
+			<th>Capacity</th>
+			<th>Extendible</th>
+			<th>Sea View</th>
+			<th>Mountain View</th>
+			<th>Price</th>
+			<th>Book</th>
+		</tr>
+		<%
+		Object availRooms = request.getAttribute("allRooms");
+		ArrayList<Room> availRoomsList = null;
+		if (bookedRooms instanceof ArrayList) {
+			availRoomsList = (ArrayList<Room>) availRooms;
+		}
+		else {
+			availRoomsList = new ArrayList<Room>();
+		}
+		for (Room room : availRoomsList) {
+		%>
+		<tr>
+			<td>
+				<%=room.getRoomName()%>
+			</td>
+			<td>
+				<%=room.getHotelID()%>
+			</td>
+			<td>
+				<%=room.getCapacity()%>
+			</td>
+			<td>
+				<%=room.getIsExtendible()%>
+			</td>
+			<td>
+				<%=room.getIsSeaView()%>
+			</td>
+			<td>
+				<%=room.getIsMountainView()%>
+			</td>
+			<td>
+				<%=room.getPrice()%>
+			</td>
+			<td>
+				<button type="submit" id="getRoomId" onclick="getRoomId();" value="<%=room.getRoomID()%>">Book</button>
+			</td>
+		</tr>
+		<%
+		}
+		%>
+	</table>
 
 </body>
 </html>

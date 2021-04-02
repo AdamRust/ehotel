@@ -26,13 +26,14 @@ public class EmployeeLoginServlet extends HttpServlet {
 		PostgreSqlConn conn = new PostgreSqlConn();
 		Account account = conn.getAccountFromUsername(username);
 		
-		
 		if (pwd.equals(account.getPassword())) {		
-				System.out.println("success");
-				// req.setAttribute("empFirstName", username);
-				// req.setAttribute("empLastName", username);
-				resp.sendRedirect("login_success.jsp?empUsername="+username);
-				return;			
+			Employee emp = conn.getEmployeeFromUsername(username);
+			System.out.println("success");
+			req.setAttribute("empFirstName", emp.getFirstName());
+			req.setAttribute("empLastName", emp.getLastName());
+			req.getRequestDispatcher("login_success.jsp").forward(req, resp);
+			// resp.sendRedirect("login_success.jsp?empFirstName="+username+"empLastName="+empLastName);
+			return;			
 		}
 		resp.sendRedirect("login_failure.jsp");
 		return;

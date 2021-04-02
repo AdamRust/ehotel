@@ -5,23 +5,23 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Language" content="ch-cn">
 <script>
-function validate() {
-	var username = document.getElementById("custAcc_Username");
-	var password = document.getElementById("custAcc_Pwd");
-	if(username.value == ""){
-		alert("Username is required.");
-		return false;
-	} else if(password.value ==""){
-		alert("Password is required.");
-		return false;
-	} else
-		return true;
-}
+	function validate() {
+		var username = document.getElementById("custAcc_Username");
+		var password = document.getElementById("custAcc_Pwd");
+		if(username.value == ""){
+			alert("Username is required.");
+			return false;
+		} else if(password.value ==""){
+			alert("Password is required.");
+			return false;
+		} else
+			return true;
+	}
 </script>
 </head>
 <body>
 	<h2>Customer Login:</h2>
-	<form>
+	<form method="post" action="custlogin">
 		<section>
 			<p>
 				<label for="custAcc_Username">
@@ -38,8 +38,8 @@ function validate() {
 			</p>
 		</section>
 		<section>
-			<button type="submit" value="submit" onclick="return validate();">Submit</button>
-			<button type="reset" value="reset">Reset</button>
+			<input type="submit" value="Submit" onclick="return validate();" />
+			<input type="reset" value="Reset" />
 		</section>
 	</form>
 </body>

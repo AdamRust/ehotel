@@ -88,3 +88,11 @@ ALTER COLUMN price TYPE NUMERIC USING price::NUMERIC;
 -- Using VARCHAR as we could have rooms such as "13A" or maybe even "Penthouse"
 ALTER TABLE room
 ADD COLUMN room_name VARCHAR(50) NOT NULL;
+
+-- Add column to Hotel for Hotel Name
+ALTER TABLE hotel
+ADD COLUMN hotel_name VARCHAR(50);
+
+-- Add columnto Hotel Brand for Brand Name
+ALTER TABLE hotel_brand
+ADD COLUMN brand_name VARCHAR(50);

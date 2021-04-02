@@ -21,14 +21,14 @@ public class CustomerLoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 //		employee account = new employee();
-		String username = req.getParameter("username");
-		String pwd = req.getParameter("pwd");
-		
+		String username = req.getParameter("custAcc_Username");
+		String pwd = req.getParameter("custAcc_Pwd");
+		System.out.println("IN SERVLET");
 		PostgreSqlConn conn = new PostgreSqlConn();
 //		[0]:name,[1]:pwd
 		// String pwdFromDB = conn.getPasswordByUsername(username);
 		Account account = conn.getAccountFromUsername(username);
-		
+		System.out.println("IN SERVLET 2");
 		if (pwd.equals(account.getPassword())) {
 			Customer cust = conn.getCustomerFromUsername(username);
 			
@@ -39,7 +39,7 @@ public class CustomerLoginServlet extends HttpServlet {
 			req.setAttribute("custLastName", cust.getLastName());
 			req.setAttribute("bookedRooms", bookedRooms);
 			req.setAttribute("allRooms", allRooms);
-
+			
 			req.getRequestDispatcher("booking.jsp").forward(req, resp);
 			return;	
 		}

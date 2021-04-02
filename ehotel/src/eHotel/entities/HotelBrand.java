@@ -9,17 +9,19 @@ public class HotelBrand {
 	// Email and Phone Number stored in separate tables in DB
 	private String phone_num;
 	private String email;
+	private String brand_name;
 	
 	public HotelBrand() {
 		
 	}
 	
-	public HotelBrand(int brand_id, int address_id, int number_of_hotels, String phone_num, String email) {
+	public HotelBrand(int brand_id, int address_id, int number_of_hotels, String phone_num, String email, String brand_name) {
 		this.brand_id = brand_id;
 		this.address_id = address_id;
 		this.number_of_hotels = number_of_hotels;
 		this.phone_num = phone_num;
 		this.email = email;
+		this.brand_name = brand_name;
 	}
 	public int getBrandID() {
 		return brand_id;
@@ -56,5 +58,13 @@ public class HotelBrand {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getBrandName() {
+		return brand_name;
+	}
+
+	public void setBrandName(String brand_name) {
+		this.brand_name = brand_name;
 	}
 }

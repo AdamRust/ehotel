@@ -10,12 +10,13 @@ public class Hotel {
 	// Email and Phone Number stored in separate tables in DB
 	private String phone_num;
 	private String email;
+	private String hotel_name;
 	
 	public Hotel() {
 		
 	}
 	
-	public Hotel(int hotel_id, int brand_id, int manager_id, int address_id, int star_category, String phone_num, String email) {
+	public Hotel(int hotel_id, int brand_id, int manager_id, int address_id, int star_category, String phone_num, String email, String hotel_name) {
 		this.hotel_id = hotel_id;
 		this.brand_id = brand_id;
 		this.manager_id = manager_id;
@@ -23,6 +24,7 @@ public class Hotel {
 		this.star_category = star_category;
 		this.phone_num = phone_num;
 		this.email = email;
+		this.hotel_name = hotel_name;
 	}
 	
 	public int getHotelID() {
@@ -66,5 +68,13 @@ public class Hotel {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getHoteName() {
+		return hotel_name;
+	}
+
+	public void setHotelName(String hotel_name) {
+		this.hotel_name = hotel_name;
 	}
 }

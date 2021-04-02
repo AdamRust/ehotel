@@ -250,6 +250,40 @@ public class PostgreSqlConn{
 			return emp;
 		}
 		
+		public Employee getEmployeeFromUsername(String username) {
+			getConn();
+			
+			Employee emp = new Employee();
+			
+			try{
+	        	// Prepare SQL query
+	            ps = db.prepareStatement(SQL.GET_EMPLOYEE_FROM_USERNAME);
+	            ps.setString(1, username);
+	            // Execute query
+	            result = ps.executeQuery();
+	            // Retrieve result
+				if (result.next()) {
+					emp.setEmployeeID(result.getInt("employee_id"));
+					emp.setHotelID(result.getInt("hotel_id"));
+					emp.setAddressID(result.getInt("address_id"));
+					emp.setFirstName(result.getString("first_name"));
+					emp.setMiddleInitial(result.getString("middle_initial"));
+					emp.setLastName(result.getString("last_name"));
+					emp.setSin(result.getString("sin"));
+					emp.setSalary(result.getInt("salary"));
+					emp.setPosition(result.getString("position"));
+					emp.setUsername(result.getString("username"));
+				}
+	            
+	        } catch(SQLException e){
+	            e.printStackTrace();
+	        } finally {
+	        	closeDB();
+	        }
+			
+			return emp;
+		}
+		
 		// Hotel
 		public Hotel getHotelFromID(int hotel_id) {
 			getConn();

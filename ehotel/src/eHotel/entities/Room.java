@@ -13,12 +13,13 @@ public class Room {
 	private boolean is_extendible;
 	// Amenities stored in separate table
 	private ArrayList<Integer> amenities;
+	private String room_name;
 	
 	public Room() {
 		
 	}
 	
-	public Room(int room_id, int hotel_id, float price, int capacity, boolean is_sea_view, boolean is_mountain_view, boolean is_extendible) {
+	public Room(int room_id, int hotel_id, float price, int capacity, boolean is_sea_view, boolean is_mountain_view, boolean is_extendible, String room_name) {
 		this.room_id = room_id;
 		this.hotel_id = hotel_id;
 		this.price = price;
@@ -27,6 +28,7 @@ public class Room {
 		this.is_mountain_view = is_mountain_view;
 		this.is_extendible = is_extendible;
 		this.amenities = new ArrayList<Integer>();
+		this.room_name = room_name;
 	}
 
 	public int getRoomID() {
@@ -95,5 +97,13 @@ public class Room {
 	
 	public void addAmenities(ArrayList<Integer> new_amenities) {
 		this.amenities.addAll(new_amenities);
+	}
+
+	public String getRoomName() {
+		return room_name;
+	}
+
+	public void setRoomName(String room_name) {
+		this.room_name = room_name;
 	}
 }

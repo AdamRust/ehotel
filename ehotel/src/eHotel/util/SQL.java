@@ -16,7 +16,8 @@ public final class SQL {
 	public static final String GET_CUSTOMER_FROM_USERNAME = "SELECT * FROM ehotel.customer WHERE username=?";
 	public static final String INSERT_NEW_CUSTOMER = "INSERT INTO ehotel.customer (address_id,first_name,middle_initial,last_name,sin,registration_date,username) VALUES (?,?,?,?,?,?,?)";
 	// Employee queries
-	public static final String GET_EMPLOYEE_FROM_ID = "SELECT * FROM ehotel.employee WHERE employee_id=?"; 
+	public static final String GET_EMPLOYEE_FROM_ID = "SELECT * FROM ehotel.employee WHERE employee_id=?";
+	public static final String GET_EMPLOYEE_FROM_USERNAME = "SELECT * FROM ehotel.employee WHERE username=?"; 
 	// Room queries
 	public static final String GET_ROOM_FROM_ID = "SELECT * FROM ehotel.room WHERE room_id=?";
 	public static final String GET_ALL_AVAIL_ROOMS = "SELECT * FROM ehotel.room WHERE room_id NOT IN (SELECT room_id FROM ehotel.booking WHERE check_in_date <= CURRENT_DATE AND check_out_date >= CURRENT_DATE)";
