@@ -4,6 +4,8 @@
 <title>Loginfailure</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Language" content="ch-cn">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 	<h4>Login failure</h4>

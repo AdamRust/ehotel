@@ -6,14 +6,43 @@ body {
     line-height: 1.6em;
 
 }
-.header {
+h1 {
     overflow-wrap: break-word;
     padding-top: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     margin-bottom: 40px;
     font-size: 30px;
     size: 40px;
+    font-weight: bold;
+
+}
+h2 {
+    overflow-wrap: break-word;
+    padding-top: 10px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 30px;
+    size: 40px;
+    font-weight: bold;
+
+}
+h3 {
+    overflow-wrap: break-word;
+    padding-top: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 25px;
+    size: 35px;
+    font-weight: bold;
+
+}
+h4 {
+    overflow-wrap: break-word;
+    padding-top: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    size: 30px;
     font-weight: bold;
 
 }
@@ -35,7 +64,10 @@ input {
 	cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
-    
+    text-align: center;
+}
+p{
+    text-align: center;
 }
 .mainelem{
     text-align: center;
