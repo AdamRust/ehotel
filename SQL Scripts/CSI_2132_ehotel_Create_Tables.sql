@@ -117,6 +117,13 @@ CREATE TABLE employee_phone (
     FOREIGN KEY(employee_id) REFERENCES employee(employee_id) ON DELETE CASCADE
 );
 
+CREATE TABLE customer_phone (
+    customer_id INT,
+    phone_number VARCHAR(12),
+    PRIMARY KEY(customer_id, phone_number),
+    FOREIGN KEY(customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
+);
+
 CREATE TABLE hotel_email (
     hotel_id INT,
     email_address VARCHAR(50),
@@ -137,12 +144,13 @@ CREATE TABLE employee_email (
     PRIMARY KEY(employee_id, email_address),
     FOREIGN KEY(employee_id) REFERENCES employee(employee_id) ON DELETE CASCADE
 );
-CREATE TABLE customer_phone (
+
+CREATE TABLE customer_email (
     customer_id INT,
-    phone_number VARCHAR(12),
-    PRIMARY KEY(customer_id, phone_number),
+    email_address VARCHAR(50),
+    PRIMARY KEY(customer_id, email_address),
     FOREIGN KEY(customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
-    
+);
 
 -- Creating a separate table to store login/account information (adding account_id FK to Customer and Employee). 
 -- NOTE: This table will not be secured at all, NO ACTUAL PASSWORDS SHOULD BE STORED in it.

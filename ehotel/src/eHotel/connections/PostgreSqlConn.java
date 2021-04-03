@@ -445,7 +445,7 @@ public class PostgreSqlConn{
 		}
 		
 		// Booking
-		public int createBooking(int cust_id, int room_id, LocalDate bookingDate, LocalDate checkInDate, LocalDate checkOutDate, int numOfOccupants) {
+		public int createBooking(int cust_id, int room_id, LocalDate bookingDate, LocalDate checkInDate, LocalDate checkOutDate, int numOfOccupants, int brand_id) {
 			getConn();
 			
 			int booking_id = -1;
@@ -458,7 +458,7 @@ public class PostgreSqlConn{
 	            ps.setObject(4, checkInDate);
 	            ps.setObject(5, checkOutDate);
 	            ps.setInt(6, numOfOccupants);
-	            
+	            ps.setInt(7, brand_id);
 	            // Execute query
 	            int success = ps.executeUpdate();
 	            if (success == 1) {
@@ -497,7 +497,7 @@ public class PostgreSqlConn{
 					booking.setCheckInDate(result.getString("check_in_date"));
 					booking.setCheckOutDate(result.getString("check_out_date"));
 					booking.setNumberOfOccupants(result.getInt("number_of_occupants"));
-					
+					booking.setBrandId(result.getInt("brand_id"));
 					bookings.add(booking);
 				}
 	        } catch(SQLException e){
@@ -529,6 +529,7 @@ public class PostgreSqlConn{
 					booking.setCheckInDate(result.getString("check_in_date"));
 					booking.setCheckOutDate(result.getString("check_out_date"));
 					booking.setNumberOfOccupants(result.getInt("number_of_occupants"));
+					booking.setBrandId(result.getInt("brand_id"));
 				}
 	        } catch(SQLException e){
 	            e.printStackTrace();

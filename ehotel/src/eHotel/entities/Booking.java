@@ -9,13 +9,14 @@ public class Booking {
     private String check_in_date;
     private String check_out_date;
     private int number_of_occupants;
+    private int brand_id;
     
     public Booking() {
     	
     }
     
 	public Booking(int booking_id, int customer_id, int room_id, int hotel_id, String booking_date, String check_in_date,
-			String check_out_date, int number_of_occupants) {
+			String check_out_date, int number_of_occupants, int brand_id) {
 		this.booking_id = booking_id;
 		this.customer_id = customer_id;
 		this.room_id = room_id;
@@ -24,6 +25,7 @@ public class Booking {
 		this.check_in_date = check_in_date;
 		this.check_out_date = check_out_date;
 		this.number_of_occupants = number_of_occupants;
+		this.brand_id = brand_id;
 	}
 
 	public int getBookingID() {
@@ -89,6 +91,12 @@ public class Booking {
 	public void setNumberOfOccupants(int number_of_occupants) {
 		this.number_of_occupants = number_of_occupants;
 	}
-	
-	
+
+	public int getBrandId() {
+		return brand_id;
+	}
+
+	public void setBrandId(int brand_id) {
+		this.brand_id = brand_id;
+	}
 }

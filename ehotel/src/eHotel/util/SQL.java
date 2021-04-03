@@ -27,7 +27,7 @@ public final class SQL {
 	public static final String GET_HOTEL_BRAND_FROM_ID = "SELECT * FROM ehotel.hotel_brand WHERE brand_id=?";
 	// Booking queries
 	public static final String GET_BOOKED_ROOMS_FOR_CUSTOMER = "SELECT * FROM ehotel.room WHERE room_id IN (SELECT room_id FROM ehotel.booking WHERE customer_id=? AND check_out_date >= CURRENT_DATE)";
-	public static final String CREATE_NEW_BOOKING = "INSERT INTO ehotel.booking (customer_id,room_id,booking_date,check_in_date,check_out_date,number_of_occupants) VALUES (?,?,?,?,?,?)";
+	public static final String CREATE_NEW_BOOKING = "INSERT INTO ehotel.booking (customer_id,room_id,booking_date,check_in_date,check_out_date,number_of_occupants,brand_id) VALUES (?,?,?,?,?,?,?)";
 	public static final String GET_ALL_BOOKINGS = "SELECT * FROM ehotel.booking";
 	public static final String GET_BOOKING_FROM_ID = "SELECT * FROM ehotel.booking WHERE booking_id=?";
 	// Rental queries

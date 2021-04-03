@@ -52,7 +52,9 @@ public class CreateBookRentServlet extends HttpServlet {
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
 		Customer customer = conn.getCustomerFromUsername(custUsername);
-		int bookingID = conn.createBooking(customer.getCustomerID(), roomId, bookingDate, checkInDate, checkOutDate, numberOfOccupants);
+		Room room = conn.getRoomFromID(roomId);
+		Hotel hotel = conn.getHotelFromID(room.getHotelID());
+		int bookingID = conn.createBooking(customer.getCustomerID(), roomId, bookingDate, checkInDate, checkOutDate, numberOfOccupants, hotel.getBrandID());
 		int rentalID = conn.createRental(rentalDate, bookingID, creditCardName, creditCardNumber, creditCardCvv, creditCardExpiryDate);
 		
 		if (bookingID != -1) {

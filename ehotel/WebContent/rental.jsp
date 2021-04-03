@@ -44,6 +44,7 @@
 				<th>Check-In Date</th>
 				<th>Check-Out Date</th>
 				<th>Number of Occupants</th>
+				<th>Brand ID</th>
 				<th>Rent</th>
 			</tr>
 			<%
@@ -81,6 +82,9 @@
 					<%=booking.getNumberOfOccupants()%>
 				</td>
 				<td>
+					<%=booking.getBrandId()%>
+				</td>
+				<td>
 					<Button type="submit" id="booking<%=count%>" onclick="setSelectedBooking('<%=booking.getBookingID()%>');" value="<%=booking.getBookingID()%>">Rent</Button>
 				</td>
 			</tr>
@@ -92,7 +96,7 @@
 	</form>
 		
 	
-	<h3>Available rooms:</h3>
+	<h3>Available Rooms:</h3>
 	<form method="post" action=roomBookRent>
 		<input type="hidden" id="selectedAvailRoom" name="selectedAvailRoom" value="" />
 		<input type="hidden" id="empFirstName" name="empFirstName" value="<%=empFirstName%>" />

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import eHotel.connections.PostgreSqlConn;
+import eHotel.entities.Hotel;
 import eHotel.entities.Room;
 
 public class CreateBookingServlet  extends HttpServlet {
@@ -43,8 +44,9 @@ public class CreateBookingServlet  extends HttpServlet {
 		
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
-		
-		int bookingID = conn.createBooking(custId, roomId, bookingDate, checkInDate, checkOutDate, numOfOccupants);
+		Room room = conn.getRoomFromID(roomId);
+		Hotel hotel = conn.getHotelFromID(room.getHotelID());
+		int bookingID = conn.createBooking(custId, roomId, bookingDate, checkInDate, checkOutDate, numOfOccupants, hotel.getBrandID());
 		
 		if (bookingID != -1) {
 			
