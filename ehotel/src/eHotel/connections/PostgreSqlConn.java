@@ -1,6 +1,7 @@
 package eHotel.connections;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class PostgreSqlConn{
 				Class.forName("org.postgresql.Driver"); 
 								
 				db = DriverManager.getConnection("jdbc:postgresql://web0.site.uottawa.ca:15432/group_a07_g27",
-						"UOTTAWA USERNAME", "UOTTAWA PASSWORD");
+						"arust051", "4@8#tD@C3P6ka#kr");
 															
 			}catch(Exception e) {
 				System.out.print("Error caught: " + e.getMessage());
@@ -363,7 +364,8 @@ public class PostgreSqlConn{
 					room.setCapacity(result.getInt("capacity"));
 					room.setIsSeaView(result.getBoolean("is_sea_view"));
 					room.setIsMountainView(result.getBoolean("is_mountain_view"));
-					room.setIsExtendible(result.getBoolean("room_name"));
+					room.setIsExtendible(result.getBoolean("is_extendible"));
+					room.setRoomName(result.getString("room_name"));
 				}
 	            
 	        } catch(SQLException e){
@@ -395,8 +397,8 @@ public class PostgreSqlConn{
 					room.setCapacity(result.getInt("capacity"));
 					room.setIsSeaView(result.getBoolean("is_sea_view"));
 					room.setIsMountainView(result.getBoolean("is_mountain_view"));
-					room.setIsExtendible(result.getBoolean("room_name"));
-					
+					room.setIsExtendible(result.getBoolean("is_extendible"));
+					room.setRoomName(result.getString("room_name"));
 					booked_rooms.add(room);
 				}
 	            
@@ -428,8 +430,8 @@ public class PostgreSqlConn{
 					room.setCapacity(result.getInt("capacity"));
 					room.setIsSeaView(result.getBoolean("is_sea_view"));
 					room.setIsMountainView(result.getBoolean("is_mountain_view"));
-					room.setIsExtendible(result.getBoolean("room_name"));
-					
+					room.setIsExtendible(result.getBoolean("is_extendible"));
+					room.setRoomName(result.getString("room_name"));
 					avail_rooms.add(room);
 				}
 	            
@@ -443,26 +445,29 @@ public class PostgreSqlConn{
 		}
 		
 		// Booking
-		public int createBooking(int cust_id, int room_id, Date bookingDate, Date checkInDate, Date checkOutDate, int numOfOccupants) {
+		public int createBooking(int cust_id, int room_id, LocalDate bookingDate, LocalDate checkInDate, LocalDate checkOutDate, int numOfOccupants) {
 			getConn();
 			
 			int booking_id = -1;
 			try{
 	        	// Prepare SQL query
-	            ps = db.prepareStatement(SQL.CREATE_NEW_BOOKING);
+	            ps = db.prepareStatement(SQL.CREATE_NEW_BOOKING, Statement.RETURN_GENERATED_KEYS);
 	            ps.setInt(1, cust_id);
 	            ps.setInt(2, room_id);
-	            ps.setDate(3, bookingDate);
-	            ps.setDate(4, checkInDate);
-	            ps.setDate(5, checkOutDate);
+	            ps.setObject(3, bookingDate);
+	            ps.setObject(4, checkInDate);
+	            ps.setObject(5, checkOutDate);
 	            ps.setInt(6, numOfOccupants);
-	            // Execute query
-	            result = ps.executeQuery();
-	            // Retrieve result
-				if (result.next()) {
-					booking_id = result.getInt("booking_id");
-				}
 	            
+	            // Execute query
+	            int success = ps.executeUpdate();
+	            if (success == 1) {
+	            	result = ps.getGeneratedKeys();
+		            // Retrieve result
+					if (result.next()) {
+						booking_id = result.getInt("booking_id");
+					}
+	            }
 	        } catch(SQLException e){
 	            e.printStackTrace();
 	        } finally {
@@ -470,6 +475,102 @@ public class PostgreSqlConn{
 	        }
 			
 			return booking_id;
+		}
+		
+		public ArrayList<Booking> getAllBookings() {
+			getConn();
+			
+			ArrayList<Booking> bookings = new ArrayList<Booking>();
+			try{
+	        	// Prepare SQL query
+	            ps = db.prepareStatement(SQL.GET_ALL_BOOKINGS);
+	            
+	            // Execute query
+	            result = ps.executeQuery();
+	            // Retrieve result
+				while (result.next()) {
+					Booking booking = new Booking();
+					booking.setBookingID(result.getInt("booking_id"));
+					booking.setCustomerID(result.getInt("customer_id"));
+					booking.setRoomID(result.getInt("room_id"));
+					booking.setBookingDate(result.getString("booking_date"));
+					booking.setCheckInDate(result.getString("check_in_date"));
+					booking.setCheckOutDate(result.getString("check_out_date"));
+					booking.setNumberOfOccupants(result.getInt("number_of_occupants"));
+					
+					bookings.add(booking);
+				}
+	        } catch(SQLException e){
+	            e.printStackTrace();
+	        } finally {
+	        	closeDB();
+	        }
+			
+			return bookings;
+		}
+		
+		public Booking getBookingFromID(int bookingId) {
+			getConn();
+			
+			Booking booking = new Booking();
+			try{
+	        	// Prepare SQL query
+	            ps = db.prepareStatement(SQL.GET_BOOKING_FROM_ID);
+	            ps.setInt(1, bookingId);
+	            
+	            // Execute query
+	            result = ps.executeQuery();
+	            // Retrieve result
+				if (result.next()) {
+					booking.setBookingID(result.getInt("booking_id"));
+					booking.setCustomerID(result.getInt("customer_id"));
+					booking.setRoomID(result.getInt("room_id"));
+					booking.setBookingDate(result.getString("booking_date"));
+					booking.setCheckInDate(result.getString("check_in_date"));
+					booking.setCheckOutDate(result.getString("check_out_date"));
+					booking.setNumberOfOccupants(result.getInt("number_of_occupants"));
+				}
+	        } catch(SQLException e){
+	            e.printStackTrace();
+	        } finally {
+	        	closeDB();
+	        }
+			
+			return booking;
+		}
+		
+		// Rental
+		public int createRental(LocalDate rental_date, int booking_id, String credit_card_name, String credit_card_number,
+				String credit_card_cvv, LocalDate credit_card_expiry_date) {
+			getConn();
+			
+			int rental_id = -1;
+			try{
+	        	// Prepare SQL query
+	            ps = db.prepareStatement(SQL.CREATE_NEW_RENTAL, Statement.RETURN_GENERATED_KEYS);
+	            ps.setObject(1, rental_date);
+	            ps.setInt(2, booking_id);
+	            ps.setString(3, credit_card_name);
+	            ps.setString(4, credit_card_number);
+	            ps.setString(5, credit_card_cvv);
+	            ps.setObject(6, credit_card_expiry_date);
+	            
+	            // Execute query
+	            int success = ps.executeUpdate();
+	            if (success == 1) {
+	            	result = ps.getGeneratedKeys();
+		            // Retrieve result
+					if (result.next()) {
+						rental_id = result.getInt("rental_id");
+					}
+	            }
+	        } catch(SQLException e){
+	            e.printStackTrace();
+	        } finally {
+	        	closeDB();
+	        }
+			
+			return rental_id;
 		}
 		
 	}

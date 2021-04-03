@@ -37,6 +37,17 @@
  
  <servlet>
  <description></description>
+ <display-name>emplogin</display-name>
+ <servlet-name>emploginServlet</servlet-name>
+ <servlet-class>eHotel.servlet.EmployeeLoginServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>emploginServlet</servlet-name>
+  <url-pattern>/emplogin</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ <description></description>
  <display-name>roombook</display-name>
  <servlet-name>roombookServlet</servlet-name>
  <servlet-class>eHotel.servlet.RoomBookServlet</servlet-class>
@@ -44,6 +55,61 @@
  <servlet-mapping>
   <servlet-name>roombookServlet</servlet-name>
   <url-pattern>/roombook</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ <description></description>
+ <display-name>createBooking</display-name>
+ <servlet-name>createBookingServlet</servlet-name>
+ <servlet-class>eHotel.servlet.CreateBookingServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>createBookingServlet</servlet-name>
+  <url-pattern>/createBooking</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ <description></description>
+ <display-name>roomRent</display-name>
+ <servlet-name>roomRentServlet</servlet-name>
+ <servlet-class>eHotel.servlet.RoomRentServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>roomRentServlet</servlet-name>
+  <url-pattern>/roomRent</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ <description></description>
+ <display-name>createRental</display-name>
+ <servlet-name>createRentalServlet</servlet-name>
+ <servlet-class>eHotel.servlet.CreateRentalServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>createRentalServlet</servlet-name>
+  <url-pattern>/createRental</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+ <description></description>
+ <display-name>roomBookRent</display-name>
+ <servlet-name>roomBookRentServlet</servlet-name>
+ <servlet-class>eHotel.servlet.RoomBookRentServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>roomBookRentServlet</servlet-name>
+  <url-pattern>/roomBookRent</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+ <description></description>
+ <display-name>createBookRental</display-name>
+ <servlet-name>createBookRentalServlet</servlet-name>
+ <servlet-class>eHotel.servlet.CreateBookRentServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>createBookRentalServlet</servlet-name>
+  <url-pattern>/createBookingRental</url-pattern>
  </servlet-mapping>
  
 

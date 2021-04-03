@@ -93,6 +93,18 @@ ADD COLUMN room_name VARCHAR(50) NOT NULL;
 ALTER TABLE hotel
 ADD COLUMN hotel_name VARCHAR(50);
 
--- Add columnto Hotel Brand for Brand Name
+-- Add column to Hotel Brand for Brand Name
 ALTER TABLE hotel_brand
 ADD COLUMN brand_name VARCHAR(50);
+
+-- Create rental table for storing rentals created by Employees when a Customer checks-in (also stores payment info)
+CREATE TABLE ehotel.rental (
+    rental_id SERIAL PRIMARY KEY,
+    rental_date DATE NOT NULL,
+    booking_id INT NOT NULL, -- rentals always connected to a booking (Employee first creates a booking if one doesn't exist already)
+    credit_card_name VARCHAR(50),
+    credit_card_number VARCHAR(50),
+    credit_card_cvv VARCHAR(50),
+    credit_card_expiry_date DATE,
+    FOREIGN KEY(booking_id) REFERENCES booking(booking_id) ON DELETE CASCADE
+);

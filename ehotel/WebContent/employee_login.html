@@ -7,18 +7,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css" />
 <script>
-function validate() {
-	var username = document.getElementById("empAcc_Username");
-	var password = document.getElementById("empAcc_Pwd");
-	if(username.value == ""){
-		alert("Username is required.");
-		return false;
-	} else if(password.value ==""){
-		alert("Password is required.");
-		return false;
-	} else
-		return true;
-}
+	function validate() {
+		var username = document.getElementById("empAcc_Username");
+		var password = document.getElementById("empAcc_Pwd");
+		if(username.value == ""){
+			alert("Username is required.");
+			return false;
+		} else if(password.value == ""){
+			alert("Password is required.");
+			return false;
+		} else
+			return true;
+	}
 </script>
 </head>
 <body>
@@ -41,8 +41,8 @@ function validate() {
 			</p>
 		</section>
 		<section>
-			<button type="submit" value="submit" onclick="return validate();">Submit</button>
-			<button type="reset" value="reset">Reset</button>
+			<input type="submit" value="Submit" onclick="return validate();" />
+			<input type="reset" value="Reset" />
 		</section>
 	</form>
 </div>

@@ -23,37 +23,14 @@ public class RoomBookServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 //		employee account = new employee();
-		int custID = Integer.parseInt(req.getParameter("custID"));
-		int roomID = Integer.parseInt(req.getParameter("roomID"));
-		// String hotelID = req.getParameter("hotelID");
-		int numOfOccupants = Integer.parseInt(req.getParameter("numOfOccupants"));
-		Date currDate = new Date();
-		java.sql.Date bookingDate = new java.sql.Date(currDate.getTime());
-		java.sql.Date checkInDate = new java.sql.Date(Date.parse(req.getParameter("checkInDate")));
-		java.sql.Date checkOutDate = new java.sql.Date(Date.parse(req.getParameter("checkOutDate")));
+		int custId = Integer.parseInt(req.getParameter("custId"));
+		int roomId = Integer.parseInt(req.getParameter("selectedRoom"));
 		
-		PostgreSqlConn conn = new PostgreSqlConn();
-		
-		// String userSSN = conn.bookRoom(custName, roomID);
-		int bookingID = conn.createBooking(custID, roomID, bookingDate, checkInDate, checkOutDate, numOfOccupants);
-		
-//		[0]:name,[1]:pwd
-//		String[] pwdfromdb = con.getuserinforbycustSSN(userSSN);
-//		
-//		
-//		
-		if (bookingID != -1) {			
-			
-			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(custID);
-			
-			ArrayList<Room> allRooms = conn.getAllAvailRooms();
-			
-			
-			req.setAttribute("custID", custID);
-			req.setAttribute("bookedRooms", bookedRooms);
-			req.setAttribute("allRooms", allRooms);
+		if (roomId != -1) {
+			req.setAttribute("custId", custId);
+			req.setAttribute("roomId", roomId);
 
-			req.getRequestDispatcher("booking.jsp").forward(req, resp);
+			req.getRequestDispatcher("create_booking.jsp").forward(req, resp);
 			return;	
 		}
 		resp.sendRedirect("login_failure.jsp");

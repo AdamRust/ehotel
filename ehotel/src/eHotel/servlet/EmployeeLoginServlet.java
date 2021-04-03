@@ -1,6 +1,8 @@
 package eHotel.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import eHotel.connections.PostgreSqlConn;
-import eHotel.entities.Account;
-import eHotel.entities.Employee;
+import eHotel.entities.*;
 
 public class EmployeeLoginServlet extends HttpServlet {
 
@@ -25,14 +26,16 @@ public class EmployeeLoginServlet extends HttpServlet {
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
 		Account account = conn.getAccountFromUsername(username);
-		
+		ArrayList<Booking> bookings = conn.getAllBookings();
+		ArrayList<Room> availRooms = conn.getAllAvailRooms();
 		if (pwd.equals(account.getPassword())) {		
 			Employee emp = conn.getEmployeeFromUsername(username);
-			System.out.println("success");
 			req.setAttribute("empFirstName", emp.getFirstName());
 			req.setAttribute("empLastName", emp.getLastName());
-			req.getRequestDispatcher("login_success.jsp").forward(req, resp);
-			// resp.sendRedirect("login_success.jsp?empFirstName="+username+"empLastName="+empLastName);
+			req.setAttribute("bookings", bookings);
+			req.setAttribute("availRooms", availRooms);
+			req.getRequestDispatcher("rental.jsp").forward(req, resp);
+			
 			return;			
 		}
 		resp.sendRedirect("login_failure.jsp");

@@ -23,20 +23,19 @@ public class CustomerLoginServlet extends HttpServlet {
 //		employee account = new employee();
 		String username = req.getParameter("custAcc_Username");
 		String pwd = req.getParameter("custAcc_Pwd");
-		System.out.println("IN SERVLET");
+		
 		PostgreSqlConn conn = new PostgreSqlConn();
 //		[0]:name,[1]:pwd
 		// String pwdFromDB = conn.getPasswordByUsername(username);
 		Account account = conn.getAccountFromUsername(username);
-		System.out.println("IN SERVLET 2");
+		
 		if (pwd.equals(account.getPassword())) {
 			Customer cust = conn.getCustomerFromUsername(username);
-			
-			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(cust.getCustomerID());
+			int custId = cust.getCustomerID();
+			ArrayList<Room> bookedRooms = conn.getBookedRoomsForCustomer(custId);
 			ArrayList<Room> allRooms = conn.getAllAvailRooms();
 			
-			req.setAttribute("custFirstName", cust.getFirstName());
-			req.setAttribute("custLastName", cust.getLastName());
+			req.setAttribute("custId", custId);
 			req.setAttribute("bookedRooms", bookedRooms);
 			req.setAttribute("allRooms", allRooms);
 			
