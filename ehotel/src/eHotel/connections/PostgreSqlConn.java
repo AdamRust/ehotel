@@ -25,7 +25,7 @@ public class PostgreSqlConn{
 				Class.forName("org.postgresql.Driver"); 
 								
 				db = DriverManager.getConnection("jdbc:postgresql://web0.site.uottawa.ca:15432/group_a07_g27",
-						"arust051", "4@8#tD@C3P6ka#kr");
+						"UOTTAWA USERNAME", "UOTTAWA PASSWORD");
 															
 			}catch(Exception e) {
 				System.out.print("Error caught: " + e.getMessage());
