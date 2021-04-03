@@ -18,13 +18,11 @@ public class RoomBookRentServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		
 		int roomId = Integer.parseInt(req.getParameter("selectedAvailRoom"));
-		String empFirstName = req.getParameter("empFirstName");
-		String empLastName = req.getParameter("empLastName");
+		int empId = Integer.parseInt(req.getParameter("empId"));
 		
 		if (roomId != -1) {
 			req.setAttribute("roomId", roomId);
-			req.setAttribute("empFirstName", empFirstName);
-			req.setAttribute("empLastName", empLastName);
+			req.setAttribute("empId", empId);
 			
 			req.getRequestDispatcher("create_booking_rental.jsp").forward(req, resp);
 			return;	

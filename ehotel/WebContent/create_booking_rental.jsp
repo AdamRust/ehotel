@@ -32,16 +32,14 @@
 	<%
 		PostgreSqlConn conn = new PostgreSqlConn();
 		int roomId = (Integer) request.getAttribute("roomId");
-		String empFirstName = (String) request.getAttribute("empFirstName");
-		String empLastName = (String) request.getAttribute("empLastName");
+		int empId = (Integer) request.getAttribute("empId");
 		Room room = conn.getRoomFromID(roomId);
 	%>
 	<h2>Booking room <%=room.getRoomName()%> for $<%=room.getPrice()%>!</h2>
 	
 	<form method="post" action=createBookingRental>
 		<input type="hidden" id="roomId" name="roomId" value="<%=roomId%>" />
-		<input type="hidden" id="empFirstName" name="empFirstName" value="<%=empFirstName%>" />
-		<input type="hidden" id="empLastName" name="empLastName" value="<%=empLastName%>" />
+		<input type="hidden" id="empId" name="empId" value="<%=empId%>" />
 		<section>
 			<p>
 				<label for="custUsername">

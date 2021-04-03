@@ -23,6 +23,7 @@ public class CreateRentalServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 //		employee account = new employee();
 		int bookingId = Integer.parseInt(req.getParameter("bookingId"));
+		int empId = Integer.parseInt(req.getParameter("empId"));
 		String creditCardName = req.getParameter("creditCardName");
 		String creditCardNumber = req.getParameter("creditCardNumber");
 		String creditCardCvv = req.getParameter("creditCardCvv");
@@ -36,8 +37,6 @@ public class CreateRentalServlet extends HttpServlet {
 			// TODO: Make this handle the exception more appropriately.
 			creditCardExpiryDate = LocalDate.now();
 		}
-		String empFirstName = req.getParameter("empFirstName");
-		String empLastName = req.getParameter("empLastName");
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
 		
@@ -48,8 +47,7 @@ public class CreateRentalServlet extends HttpServlet {
 			ArrayList<Booking> bookings = conn.getAllBookings();
 			ArrayList<Room> availRooms = conn.getAllAvailRooms();
 			
-			req.setAttribute("empFirstName", empFirstName);
-			req.setAttribute("empLastName", empLastName);
+			req.setAttribute("empId", empId);
 			req.setAttribute("bookings", bookings);
 			req.setAttribute("availRooms", availRooms);
 

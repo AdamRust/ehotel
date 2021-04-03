@@ -25,16 +25,19 @@
 </script>
 <body>
 	<%
-		String empFirstName = (String) request.getParameter("empFirstName");
-		String empLastName = (String) request.getParameter("empLastName");
+		PostgreSqlConn conn = new PostgreSqlConn();
+		
+		int empId = (Integer) request.getAttribute("empId");
+		Employee emp = conn.getEmployeeFromID(empId);
+		String empFirstName = emp.getFirstName();
+		String empLastName = emp.getLastName();
 	%>
 	<h2>Welcome, <%=empFirstName%> <%=empLastName%>!</h2>
 	
 	<h3>Bookings:</h3>
 	<form method="post" action=roomRent>
 		<input type="hidden" id="selectedBooking" name="selectedBooking" value="" />
-		<input type="hidden" id="empFirstName" name="empFirstName" value="<%=empFirstName%>" />
-		<input type="hidden" id="empLastName" name="empLastName" value="<%=empLastName%>" />
+		<input type="hidden" id="empId" name="empId" value="<%=empId%>" />
 		<table>
 			<tr>
 				<th>Booking ID</th>
@@ -99,8 +102,7 @@
 	<h3>Available Rooms:</h3>
 	<form method="post" action=roomBookRent>
 		<input type="hidden" id="selectedAvailRoom" name="selectedAvailRoom" value="" />
-		<input type="hidden" id="empFirstName" name="empFirstName" value="<%=empFirstName%>" />
-		<input type="hidden" id="empLastName" name="empLastName" value="<%=empLastName%>" />
+		<input type="hidden" id="empId" name="empId" value="<%=empId%>" />
 		<table>
 			<tr>
 				<th>Room Number</th>

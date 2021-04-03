@@ -25,6 +25,7 @@ public class CreateBookRentServlet extends HttpServlet {
 		String custUsername = req.getParameter("custUsername");
 		int roomId = Integer.parseInt(req.getParameter("roomId"));
 		int numberOfOccupants = Integer.parseInt(req.getParameter("numOfOccupants"));
+		int empId = Integer.parseInt(req.getParameter("empId"));
 		String creditCardName = req.getParameter("creditCardName");
 		String creditCardNumber = req.getParameter("creditCardNumber");
 		String creditCardCvv = req.getParameter("creditCardCvv");
@@ -47,8 +48,6 @@ public class CreateBookRentServlet extends HttpServlet {
 			checkInDate = LocalDate.now();
 			checkOutDate = LocalDate.now();
 		}
-		String empFirstName = req.getParameter("empFirstName");
-		String empLastName = req.getParameter("empLastName");
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
 		Customer customer = conn.getCustomerFromUsername(custUsername);
@@ -62,8 +61,7 @@ public class CreateBookRentServlet extends HttpServlet {
 			ArrayList<Booking> bookings = conn.getAllBookings();
 			ArrayList<Room> availRooms = conn.getAllAvailRooms();
 			
-			req.setAttribute("empFirstName", empFirstName);
-			req.setAttribute("empLastName", empLastName);
+			req.setAttribute("empId", empId);
 			req.setAttribute("bookings", bookings);
 			req.setAttribute("availRooms", availRooms);
 

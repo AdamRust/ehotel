@@ -20,7 +20,7 @@ public class RoomRentServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		int bookingId = Integer.parseInt(req.getParameter("selectedBooking"));
-		String empFirstName = req.getParameter("empFirstName");
+		int empId = Integer.parseInt(req.getParameter("empId"));
 		String empLastName = req.getParameter("empLastName");
 		
 		PostgreSqlConn conn = new PostgreSqlConn();
@@ -30,8 +30,7 @@ public class RoomRentServlet extends HttpServlet {
 		if (bookingId != -1) {
 			req.setAttribute("bookingId", bookingId);
 			req.setAttribute("roomId", booking.getRoomID());
-			req.setAttribute("empFirstName", empFirstName);
-			req.setAttribute("empLastName", empLastName);
+			req.setAttribute("empId", empId);
 			req.getRequestDispatcher("create_rental.jsp").forward(req, resp);
 			return;	
 		}

@@ -30,8 +30,9 @@ public class EmployeeLoginServlet extends HttpServlet {
 		ArrayList<Room> availRooms = conn.getAllAvailRooms();
 		if (pwd.equals(account.getPassword())) {		
 			Employee emp = conn.getEmployeeFromUsername(username);
-			req.setAttribute("empFirstName", emp.getFirstName());
-			req.setAttribute("empLastName", emp.getLastName());
+//			req.setAttribute("empFirstName", emp.getFirstName());
+//			req.setAttribute("empLastName", emp.getLastName());
+			req.setAttribute("empId", emp.getEmployeeID());
 			req.setAttribute("bookings", bookings);
 			req.setAttribute("availRooms", availRooms);
 			req.getRequestDispatcher("rental.jsp").forward(req, resp);

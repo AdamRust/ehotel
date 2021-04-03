@@ -56,10 +56,7 @@ public class CustomerRegisterServlet extends HttpServlet{
 			
 			ArrayList<Room> allRooms = conn.getAllAvailRooms();
 			
-			System.out.println(allRooms);
-			
-			req.setAttribute("custFirstName", custFirstName);
-			req.setAttribute("custLastName", custLastName);
+			req.setAttribute("custId", newCustID);
 			req.setAttribute("bookedRooms", bookedRooms);
 			req.setAttribute("allRooms", allRooms);
 
