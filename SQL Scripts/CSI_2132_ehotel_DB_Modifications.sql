@@ -96,9 +96,13 @@ ADD COLUMN hotel_name VARCHAR(50);
 -- Add column to Hotel Brand for Brand Name
 ALTER TABLE hotel_brand
 ADD COLUMN brand_name VARCHAR(50);
--- in order to sort the customers by hotel chain.
+
+-- Add brand_id to Booking in order to sort the customers by hotel chain.
 ALTER TABLE booking
-ADD COLUMN brand_id INT,
+ADD COLUMN brand_id INT;
+
+ALTER TABLE booking
+ADD CONSTRAINT fk_booking_brand
 FOREIGN KEY(brand_id) REFERENCES hotel_brand(brand_id) ON DELETE CASCADE;
 
 -- Create rental table for storing rentals created by Employees when a Customer checks-in (also stores payment info)
